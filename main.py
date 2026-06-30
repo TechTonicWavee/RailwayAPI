@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI ,Path
 import json
 
 
@@ -21,3 +21,11 @@ def about():
 def view():
     data = load_data()
     return data 
+
+@app.get('/patient/{patient_id}')
+def view_patient(patient_id: str):
+    data = load_data()
+    for patient in data:
+        if patient_id== patient_id:
+            return data[patient_id]
+    return {"message": "Patient not found"}
